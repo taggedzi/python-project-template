@@ -1,7 +1,7 @@
 """Textual TUI app for {{ project_name }}."""
 
 from __future__ import annotations
-
+{% if project_kind == "tui" %}
 import argparse
 import logging
 
@@ -47,3 +47,11 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+{% else %}
+def main() -> None:
+    raise SystemExit("TUI entry point is not enabled for this project kind.")
+
+
+if __name__ == "__main__":
+    main()
+{% endif %}

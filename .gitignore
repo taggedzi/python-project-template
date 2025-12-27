@@ -23,6 +23,7 @@ htmlcov/
 
 # Copier template artifacts
 *.rej
+_renders/
 
 # Editors
 .vscode/

@@ -19,11 +19,11 @@ project_slug:
 
 author_name:
   type: str
-  default: ""
+  default: "Your Name"
 
 author_email:
   type: str
-  default: ""
+  default: "you@example.com"
 
 description:
   type: str
