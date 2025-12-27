@@ -1,0 +1,108 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{ project_slug }}"
+version = "0.1.0"
+description = "{{ description }}"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "{{ license }}" }
+authors = [
+  { name = "{{ author_name }}", email = "{{ author_email }}" },
+]
+urls = { "Homepage" = "https://github.com/OWNER/{{ project_slug }}", "Issues" = "https://github.com/OWNER/{{ project_slug }}/issues" }
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+{% if license == "MIT" %}
+  "License :: OSI Approved :: MIT License",
+{% endif %}
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+{% if project_kind == "tui" %}
+dependencies = [
+  "textual>=0.59",
+]
+{% else %}
+dependencies = []
+{% endif %}
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "ruff>=0.5",
+{% if include_mypy %}
+  "mypy>=1.6",
+{% endif %}
+{% if include_nox %}
+  "nox>=2024.3.2",
+{% endif %}
+{% if include_precommit %}
+  "pre-commit>=3.6",
+{% endif %}
+]
+
+{% if project_kind == "cli" %}
+[project.scripts]
+{{ project_slug }} = "{{ package_name }}.cli:main"
+{% elif project_kind == "tui" %}
+[project.scripts]
+{{ project_slug }} = "{{ package_name }}.app:main"
+{% endif %}
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+{% if include_mypy and project_kind == "library" %}
+[tool.setuptools.package-data]
+"{{ package_name }}" = ["py.typed"]
+{% endif %}
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM", "W"]
+ignore = [
+  "E501",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+{% if include_mypy %}
+[tool.mypy]
+python_version = "3.9"
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+no_implicit_optional = true
+disallow_any_generics = false
+check_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = [
+  "tests.*",
+]
+disallow_untyped_defs = false
+{% endif %}
+
+[tool.pytest.ini_options]
+addopts = [
+  "-ra",
+]
+testpaths = ["tests"]

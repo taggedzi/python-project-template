@@ -1,0 +1,40 @@
+"""Nox sessions."""
+
+from __future__ import annotations
+
+import nox
+
+nox.options.sessions = ["lint"{% if include_mypy %}, "typecheck"{% endif %}, "tests"]
+
+
+@nox.session
+def lint(session: nox.Session) -> None:
+    session.install("ruff")
+    session.run("ruff", "check", ".")
+    session.run("ruff", "format", "--check", ".")
+
+
+{% if include_mypy %}
+@nox.session
+def typecheck(session: nox.Session) -> None:
+    session.install("mypy")
+    session.install("-e", ".")
+    session.run("mypy", "src")
+
+
+{% endif %}
+@nox.session
+def tests(session: nox.Session) -> None:
+    session.install("pytest")
+    session.install("-e", ".")
+    session.run("pytest")
+
+
+@nox.session(python=False)
+def local(session: nox.Session) -> None:
+    session.run("ruff", "check", ".", external=True)
+    session.run("ruff", "format", "--check", ".", external=True)
+{% if include_mypy %}
+    session.run("mypy", "src", external=True)
+{% endif %}
+    session.run("pytest", external=True)

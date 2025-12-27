@@ -1,0 +1,24 @@
+name: Template Smoke Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Copier
+        run: python -m pip install --upgrade pip copier
+
+      - name: Run Template Smoke Tests
+        run: python tools/test_template_generation.py

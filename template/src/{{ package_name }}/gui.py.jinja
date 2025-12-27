@@ -1,0 +1,38 @@
+"""GUI entry point placeholder for {{ project_name }}."""
+
+from __future__ import annotations
+
+import argparse
+import logging
+
+from . import __version__
+from .logging_utils import setup_logging
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="{{ project_slug }}", description="{{ description }}")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
+    parser.add_argument("--quiet", action="store_true", help="Only show warnings and errors")
+    parser.add_argument("--log-file", help="Write logs to a file path")
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    level = "INFO"
+    if args.verbose:
+        level = "DEBUG"
+    if args.quiet:
+        level = "WARNING"
+
+    setup_logging(level=level, log_file=args.log_file)
+    logging.getLogger(__name__).info("Starting {{ project_name }} GUI placeholder")
+    print("Add a GUI toolkit (PySide6, Tkinter, etc.) and wire it here.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

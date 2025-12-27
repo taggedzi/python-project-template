@@ -1,0 +1,17 @@
+.PHONY: fmt lint test{% if include_mypy %} typecheck{% endif %} all
+
+fmt:
+	ruff format .
+
+lint:
+	ruff check .
+
+{% if include_mypy %}
+typecheck:
+	mypy src
+
+{% endif %}
+test:
+	pytest
+
+all: lint{% if include_mypy %} typecheck{% endif %} test

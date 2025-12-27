@@ -1,0 +1,93 @@
+# {{ project_name }}
+
+[![CI](https://github.com/OWNER/{{ project_slug }}/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/{{ project_slug }}/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/{{ project_slug }}.svg)](https://pypi.org/project/{{ project_slug }}/)
+[![License](https://img.shields.io/badge/license-{{ license | replace(' ', '%20') }}-blue.svg)](LICENSE)
+
+{{ description }}
+
+## Quickstart
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+{% if project_kind == "cli" %}
+```bash
+{{ project_slug }} --help
+```
+{% elif project_kind == "tui" %}
+```bash
+{{ project_slug }}
+```
+{% elif project_kind == "gui" %}
+This template is dependency-light for desktop GUI projects. Add a GUI toolkit such as
+PySide6 or Tkinter and wire up an entry point.
+{% else %}
+```python
+import {{ package_name }}
+```
+{% endif %}
+
+## Installation
+
+{% if project_kind == "cli" %}
+```bash
+pipx install {{ project_slug }}
+```
+{% else %}
+```bash
+pip install {{ project_slug }}
+```
+{% endif %}
+
+## Generate From Template
+
+If this project was created with Copier, update it later with:
+
+```bash
+copier update
+```
+
+## Development
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+```
+
+```bash
+ruff check .
+ruff format .
+pytest
+{% if include_mypy %}mypy src{% endif %}
+```
+
+{% if include_nox %}
+```bash
+nox -s lint typecheck tests
+nox -s local
+```
+{% endif %}
+
+## Release
+
+```bash
+python -m pip install --upgrade build twine
+python -m build
+python -m twine check dist/*
+```
+
+## Project Layout
+
+- `src/{{ package_name }}/` package source
+- `tests/` tests
+{% if include_docs %}- `docs/` lightweight docs and notes
+{% endif %}
+
+## Release
+
+See `PRODUCTION_READY_CHECKLIST.md` for a release checklist and recommendations.

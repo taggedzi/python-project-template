@@ -1,0 +1,81 @@
+_min_copier_version: "8.0.0"
+_templates_suffix: ".jinja"
+_subdirectory: template
+
+project_name:
+  type: str
+  default: "My Project"
+  help: "Human-readable project name"
+
+package_name:
+  type: str
+  default: "{{ project_name|lower|replace(' ', '_')|replace('-', '_') }}"
+  help: "Python import package name (snake_case)"
+
+project_slug:
+  type: str
+  default: "{{ project_name|lower|replace(' ', '-')|replace('_', '-') }}"
+  help: "Repository folder name (kebab-case)"
+
+author_name:
+  type: str
+  default: ""
+
+author_email:
+  type: str
+  default: ""
+
+description:
+  type: str
+  default: ""
+
+license:
+  type: str
+  default: "MIT"
+
+project_kind:
+  type: str
+  choices:
+    - library
+    - cli
+    - gui
+    - tui
+  default: library
+
+include_nox:
+  type: bool
+  default: true
+
+include_precommit:
+  type: bool
+  default: true
+
+include_mypy:
+  type: bool
+  default: true
+
+include_github_actions:
+  type: bool
+  default: true
+
+include_docs:
+  type: bool
+  default: true
+
+include_release_drafting:
+  type: bool
+  default: false
+
+_exclude:
+  - "{% if not include_docs %}docs{% endif %}"
+  - "{% if not include_docs %}docs/**{% endif %}"
+  - "{% if not include_github_actions %}.github{% endif %}"
+  - "{% if not include_github_actions %}.github/**{% endif %}"
+  - "{% if not include_release_drafting %}.github/release-drafter.yml{% endif %}"
+  - "{% if not include_release_drafting %}.github/workflows/release-drafter.yml{% endif %}"
+  - "{% if not include_precommit %}.pre-commit-config.yaml.jinja{% endif %}"
+  - "{% if not include_nox %}noxfile.py.jinja{% endif %}"
+  - "{% if not include_mypy or project_kind != 'library' %}src/{{ package_name }}/py.typed{% endif %}"
+  - "{% if project_kind != 'cli' %}src/{{ package_name }}/cli.py.jinja{% endif %}"
+  - "{% if project_kind != 'tui' %}src/{{ package_name }}/app.py.jinja{% endif %}"
+  - "{% if project_kind != 'gui' %}src/{{ package_name }}/gui.py.jinja{% endif %}"

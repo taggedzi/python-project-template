@@ -1,0 +1,24 @@
+# Security Policy
+
+## Reporting a Vulnerability
+
+Please open a private security advisory or email the maintainer at {{ author_email }}.
+Include a clear description, steps to reproduce, and any impact assessment.
+
+## Dependency Strategy
+
+- Keep direct dependencies minimal and review new additions.
+- Prefer version ranges with upper bounds for production deployments.
+- Use `pip install --require-hashes` or a lockfile (e.g., `pip-tools`) for releases.
+
+## Secrets and Sensitive Data
+
+- Do not commit secrets or credentials to the repository.
+- Use environment variables or OS keychains for secrets.
+- Scrub logs and error messages that may include sensitive data.
+
+## Safe File Handling
+
+- Validate and normalize file paths before access.
+- Avoid writing outside intended directories.
+- Use atomic writes for critical files and handle permissions explicitly.
