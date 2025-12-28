@@ -1,14 +1,6 @@
 # python-template
 
-<p align="center">
-   <img src="https://img.shields.io/badge/python-3.9--3.12-blue" />
-   <img src="https://img.shields.io/badge/type-project%20template-blueviolet" />
-   <img src="https://img.shields.io/badge/template-copier-orange" />
-   <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen" />
-   <img src="https://img.shields.io/badge/lint-ruff-red" />
-   <img src="https://img.shields.io/badge/type%20check-mypy-blue" />
-   <img src="https://github.com/taggedzi/python-project-template/actions/workflows/template-smoke.yml/badge.svg?branch=main" />
-</p>
+[![Python](https://img.shields.io/badge/python-3.9--3.12-blue)](https://www.python.org/) [![Type](https://img.shields.io/badge/type-project%20template-blueviolet)](https://github.com/taggedzi/python-project-template/) [![Template](https://img.shields.io/badge/template-copier-orange)](https://copier.readthedocs.io/) [![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen)](https://pre-commit.com/) [![Lint](https://img.shields.io/badge/lint-ruff-red)](https://docs.astral.sh/ruff/) [![Type Check](https://img.shields.io/badge/type%20check-mypy-blue)](https://mypy-lang.org/) [![Template Smoke](https://github.com/taggedzi/python-project-template/actions/workflows/template-smoke.yml/badge.svg?branch=main)](https://github.com/taggedzi/python-project-template/actions/workflows/template-smoke.yml)
 
 _Badges reflect the template itself, not generated projects_
 
