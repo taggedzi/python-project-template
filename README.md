@@ -1,9 +1,18 @@
 # python-template
 
-This repository is a personal Python project template and backup.
-It exists so I always have a known-good starting point for new projects
-and a copy of my preferred tooling, layout, and defaults in case I lose
-local files or need to start fresh on a new system.
+<p align="center">
+   <img src="https://img.shields.io/badge/python-3.9--3.12-blue" />
+   <img src="https://img.shields.io/badge/type-project%20template-blueviolet" />
+   <img src="https://img.shields.io/badge/template-copier-orange" />
+   <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen" />
+   <img src="https://img.shields.io/badge/lint-ruff-red" />
+   <img src="https://img.shields.io/badge/type%20check-mypy-blue" />
+   <img src="https://github.com/taggedzi/python-project-template/actions/workflows/template-smoke.yml/badge.svg?branch=main" />
+</p>
+
+_Badges reflect the template itself, not generated projects_
+
+This repository is a personal Python project template and backup. It exists so I always have a known-good starting point for new projects and a copy of my preferred tooling, layout, and defaults in case I lose local files or need to start fresh on a new system.
 
 ## When to use this
 
